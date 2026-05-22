@@ -145,6 +145,15 @@ select option{background:var(--card-dark);color:var(--white)}
         <input type="text" id="inp_upi" placeholder="rohan@upi"/>
         <div class="form-hint">💰 This is where you will receive your earnings</div>
       </div>
+      <div class="form-group full">
+        <label>Password *</label>
+        <input type="password" id="inp_password" placeholder="Create a strong password"/>
+        <div class="form-hint">🔒 Use at least 8 characters</div>
+      </div>
+      <div class="form-group full">
+        <label>Confirm Password *</label>
+        <input type="password" id="inp_confirm_password" placeholder="Confirm your password"/>
+      </div>
     </div>
     <button class="btn-primary" id="btn1">Continue → Choose Your Skill</button>
   </div>
@@ -282,15 +291,41 @@ document.getElementById('btn1').onclick = function() {
   var course = document.getElementById('inp_course').value;
   var year = document.getElementById('inp_year').value;
   var upi = document.getElementById('inp_upi').value.trim();
+  var password = document.getElementById('inp_password').value;
+  var confirm_password = document.getElementById('inp_confirm_password').value;
   var err = document.getElementById('err1');
-  if(!name||!email||!phone||!college||!course||!year||!upi) {
+  if(!name||!email||!phone||!college||!course||!year||!upi||!password) {
     err.textContent='Please fill all required fields!';
+    err.classList.add('show');
+    setTimeout(function(){err.classList.remove('show');},3000);
+    return;
+  }
+  if(password.length < 8) {
+    err.textContent='Password must be at least 8 characters!';
+    err.classList.add('show');
+    setTimeout(function(){err.classList.remove('show');},3000);
+    return;
+  }
+  if(password !== confirm_password) {
+    err.textContent='Passwords do not match!';
     err.classList.add('show');
     setTimeout(function(){err.classList.remove('show');},3000);
     return;
   }
   if(!email.includes('@')) {
     err.textContent='Please enter a valid email!';
+    err.classList.add('show');
+    setTimeout(function(){err.classList.remove('show');},3000);
+    return;
+  }
+  if(password.length < 8) {
+    err.textContent='Password must be at least 8 characters!';
+    err.classList.add('show');
+    setTimeout(function(){err.classList.remove('show');},3000);
+    return;
+  }
+  if(password !== confirm_password) {
+    err.textContent='Passwords do not match!';
     err.classList.add('show');
     setTimeout(function(){err.classList.remove('show');},3000);
     return;
@@ -413,7 +448,9 @@ document.getElementById('registerBtn').onclick = async function() {
     course: document.getElementById('inp_course').value,
     year: parseInt(document.getElementById('inp_year').value),
     skill: selectedSkill,
+    password: document.getElementById('inp_password').value,
     upi_id: document.getElementById('inp_upi').value.trim(),
+    password: document.getElementById('inp_password').value,
     score: testScore,
     level: badge.level,
     badge: badge.label,
