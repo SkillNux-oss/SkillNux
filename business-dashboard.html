@@ -571,7 +571,7 @@ async function findStudents(){
       var isFav=favourites.some(function(f){return f.email===s.email;});
       var badgeClass=s.badge&&s.badge.includes('Expert')?'badge-expert':s.badge&&s.badge.includes('Advanced')?'badge-adv':'badge-beg';
       html+='<div class="student-card">';
-      html+='<div class="sc-header"><div class="sc-av">'+ini+'</div><div><div class="sc-name">'+s.name+'</div><div class="sc-college">'+（s.college||'—')+'</div></div></div>';
+      html+='<div class="sc-header"><div class="sc-av">'+ini+'</div><div><div class="sc-name">'+s.name+'</div><div class="sc-college">'+(s.college||'—')+'</div></div></div>';
       html+='<div class="sc-skill">'+s.skill+'</div>';
       html+='<div class="sc-stats"><div class="sc-stat"><div class="sc-stat-val">'+(s.score||0)+'/5</div><div class="sc-stat-lab">Score</div></div><div class="sc-stat"><div class="sc-stat-val">'+(s.level||'Beginner')+'</div><div class="sc-stat-lab">Level</div></div></div>';
       html+='<div class="sc-badge '+badgeClass+'">'+(s.badge||'📚 Beginner')+'</div>';
